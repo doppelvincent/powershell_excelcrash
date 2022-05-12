@@ -81,45 +81,45 @@ Function Test-FileLock {
 }
 
 $userInput = Read-Host "[a] Zufallsgenerator [b] Zufallsgenerator + Webdriver"
-for(;;){
 $counter = 0
-try{
-    $isLocked = Test-FileLock($filePath)
+for(;;){
+    try{
+        $isLocked = Test-FileLock($filePath)
+        
+        If (!($isLocked)){
+            Start-Sleep -s 10
     
-    If (!($isLocked)){
-        Start-Sleep -s 10
-   
-        $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
-     
-        If ($userInput -eq "a"){
-            If ($proc){
-                $proc.Kill()
-                $counter += 1
-                Write-Host $counter
-                OpenAndRunZG($filePath)
+            $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
+        
+            If ($userInput -eq "a"){
+                If ($proc){
+                    $proc.Kill()
+                    $counter += 1
+                    Write-Host $counter
+                    OpenAndRunZG($filePath)
+                    Break
+                }
+                Else {
+                OpenAndRunZG($filePath) 
                 Break
+                }
+                
             }
-            Else {
-               OpenAndRunZG($filePath) 
-               Break
+            elseif ($userInput -eq "b"){
+                If ($proc) {
+                    $proc.Kill()
+                    $counter += 1
+                    Write-Host $counter
+                    OpenAndRunZG_WD($filePath)
+                    Break
+                }
+                Else {
+                    OpenAndRunZG_WD($filePath)
+                    Break
+                }
+                
             }
-            
-        }
-        elseif ($userInput -eq "b"){
-            If ($proc) {
-                $proc.Kill()
-                $counter += 1
-                Write-Host $counter
-                OpenAndRunZG_WD($filePath)
-                Break
             }
-            Else {
-                OpenAndRunZG_WD($filePath)
-                Break
-            }
-            
-        }
-        }
         Else {
             $proc = Get-Process -Name EXCEL | Sort-Object -Property ProcessName -Unique -ErrorAction SilentlyContinue
             $i = 1
@@ -134,14 +134,14 @@ try{
                 else {
                     break
                 }
-            Start-Sleep -s 20
+                Start-Sleep -s 20
             }
         }
 
 
+        }
+    catch{    
     }
-catch{    
-}
     Start-sleep -s 5
     
 }
