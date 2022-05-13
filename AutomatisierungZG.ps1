@@ -21,48 +21,48 @@ Function OpenAndRunZG {
     Write-Output $worksheet.name
     $excl.Run("EverythingInOne")
 }
-# Function OpenAndRunZG_WD{
-#     Param([string]$Path)
-#     $excl = New-Object -ComObject Excel.Application
-#     #$excl.Visible = $true
-#     #$excl.Workbooks.Open($Path)
-#     Start-Sleep -s 5
-#     Invoke-Item $Path
-#     New-ItemProperty -Path Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Excel\Security -Name "VBAWarnings" -Value "1" -PropertyType DWORD -Force | Out-Null
-#     Start-Sleep -s 20
-#     $popup = New-Object -ComObject wscript.shell
-#     $popup.AppActivate("Excel")
-#     $popup.SendKeys("{ESC}")
+Function OpenAndRunZG_WD{
+    Param([string]$Path)
+    $excl = New-Object -ComObject Excel.Application
+    #$excl.Visible = $true
+    #$excl.Workbooks.Open($Path)
+    Start-Sleep -s 5
+    Invoke-Item $Path
+    New-ItemProperty -Path Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Excel\Security -Name "VBAWarnings" -Value "1" -PropertyType DWORD -Force | Out-Null
+    Start-Sleep -s 20
+    $popup = New-Object -ComObject wscript.shell
+    $popup.AppActivate("Excel")
+    $popup.SendKeys("{ESC}")
 
-#     Start-Sleep -s 60
+    Start-Sleep -s 60
 
-#     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
-#     Write-Output $worksheet.name
+    $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
+    Write-Output $worksheet.name
 
-#     Start-Sleep -s 3
+    Start-Sleep -s 3
 
-#     $excl.Run("EverythingInOne")
+    $excl.Run("EverythingInOne")
 
-#     Start-Sleep -s 180
-#     Write-Host ("DER ZG IST DURCHGELAUFEN")
+    Start-Sleep -s 180
+    Write-Host ("DER ZG IST DURCHGELAUFEN")
 
-#     $worksheet = $excl.Worksheets.item('WEBDRIVER RESULT')
-#     For ($i = 7;;$i++){
-#         $text = $worksheet.Cells(4,$i).Text
-#         if ($text -eq ""){
-#             $lastcolumn = $i - 1
-#             break
-#         }
+    $worksheet = $excl.Worksheets.item('WEBDRIVER RESULT')
+    For ($i = 7;;$i++){
+        $text = $worksheet.Cells(4,$i).Text
+        if ($text -eq ""){
+            $lastcolumn = $i - 1
+            break
+        }
     
-#     }
-#     Start-Sleep -s 3
-#     $anzahl = $lastcolumn - 3
-#     $worksheet.Cells.Item(2,2) = "4"
-#     $worksheet.Cells.Item(3,2) = "$anzahl"
-#     Write-Host ("DER WEBDRIVER WIRD IN 30 SEKUNDEN BEGINNEN")
-#     Start-Sleep -s 30
-#     $excl.Run("RunWebDriverCode")
-# }
+    }
+    Start-Sleep -s 3
+    $anzahl = $lastcolumn - 3
+    $worksheet.Cells.Item(2,2) = "4"
+    $worksheet.Cells.Item(3,2) = "$anzahl"
+    Write-Host ("DER WEBDRIVER WIRD IN 30 SEKUNDEN BEGINNEN")
+    Start-Sleep -s 30
+    $excl.Run("RunWebDriverCode")
+}
 Function Test-FileLock {
     Param(
         [parameter(Mandatory=$True)]
@@ -80,7 +80,8 @@ Function Test-FileLock {
     }
 }
 
-# $userInput = Read-Host "[a] Zufallsgenerator [b] Zufallsgenerator + Webdriver"
+$userInput = Read-Host "[a] Zufallsgenerator [b] Zufallsgenerator + Webdriver"
+Remove-Item -Path "C:\Users\Guest\Desktop\doku_*.txt"
 $counter = 0
 for(;;){
     try{
@@ -90,18 +91,33 @@ for(;;){
             Start-Sleep -s 10
     
             $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
-        
-            If ($proc){
-                $proc.Kill()
-                $counter += 1
-                Write-Host $counter
-                OpenAndRunZG($filePath)
+            If ($userInput -eq "a"){
+                If ($proc){
+                    $proc.Kill()
+                    $counter += 1
+                    Write-Host $counter
+                    OpenAndRunZG($filePath)
+                    Break
+                }
+                Else {
+                OpenAndRunZG($filePath) 
                 Break
+                }
             }
-            Else {
-            OpenAndRunZG($filePath) 
-            Break
+            Elseif ($userInput -eq "b"){
+                If ($proc) {
+                    $proc.Kill()
+                    $counter += 1
+                    Write-Host $counter
+                    OpenAndRunZG_WD($filePath)
+                    Break
+                }
+                Else {
+                    OpenAndRunZG_WD($filePath)
+                    Break
+                }
             }
+
                 
             }
         Else {
@@ -129,4 +145,4 @@ for(;;){
     Start-sleep -s 5
     
 }
-    [System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
+[System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
