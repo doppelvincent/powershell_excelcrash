@@ -20,6 +20,8 @@ Function OpenAndRunZG {
     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
     Write-Output $worksheet.name
     $excl.Run("EverythingInOne")
+
+    Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
 
 }
@@ -64,6 +66,8 @@ Function OpenAndRunZG_WD{
     Write-Host ("DER WEBDRIVER WIRD IN 30 SEKUNDEN BEGINNEN")
     Start-Sleep -s 30
     $excl.Run("RunWebDriverCode")
+
+    Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
 
 }
