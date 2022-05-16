@@ -19,6 +19,7 @@ Function OpenAndRunZG {
     Start-Sleep -s 60
     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
     Write-Output $worksheet.name
+    Start-Sleep -s 3
     $excl.Run("EverythingInOne")
 
     Add-Type -AssemblyName System.Windows.Forms
@@ -134,7 +135,7 @@ for(;;){
             while ($true){
                 if ($proc.Responding -eq $false){
                     $i += 1
-                    if ($i -eq 90){
+                    if ($i -eq 15){
                         $proc.Kill()
                         break
                     }
