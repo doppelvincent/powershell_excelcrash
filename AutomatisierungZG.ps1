@@ -135,7 +135,7 @@ for(;;){
             while ($true){
                 if ($proc.Responding -eq $false){
                     $i += 1
-                    if ($i -eq 15){
+                    if ($i -eq 30){
                         $proc.Kill()
                         break
                     }
