@@ -130,12 +130,12 @@ for(;;){
                 
             }
         Else {
-            $proc = Get-Process -Name EXCEL | Sort-Object -Property ProcessName -Unique -ErrorAction SilentlyContinue
             $i = 1
             while ($true){
+                $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
                 if ($proc.Responding -eq $false){
                     $i += 1
-                    if ($i -eq 30){
+                    if ($i -eq 90){
                         $proc.Kill()
                         break
                     }
