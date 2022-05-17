@@ -135,7 +135,7 @@ for(;;){
                 $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
                 if ($proc.Responding -eq $false){
                     $i += 1
-                    if ($i -eq 90){
+                    if ($i -eq 1200){
                         $proc.Kill()
                         break
                     }
@@ -143,7 +143,7 @@ for(;;){
                 else {
                     break
                 }
-                Start-Sleep -s 20
+                Start-Sleep -s 1
             }
         }
 
