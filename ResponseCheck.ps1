@@ -9,6 +9,7 @@ while ($true){
       }
   }
   else {
+      Write-Host "Excel is responding"
       break
   }
   Start-Sleep -s 1

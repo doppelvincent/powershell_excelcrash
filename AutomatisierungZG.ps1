@@ -19,7 +19,7 @@ Function OpenAndRunZG {
     Start-Sleep -s 60
     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
     Write-Output $worksheet.name
-    Start-Job 
+    Start-Job -FilePath C:\Users\Guest\Desktop\Powershell_AutomatisierungZG\ResponseCheck.ps1
     $excl.Run("EverythingInOne")
 
     Add-Type -AssemblyName System.Windows.Forms
@@ -45,7 +45,7 @@ Function OpenAndRunZG_WD{
     Write-Output $worksheet.name
 
     Start-Sleep -s 3
-
+    Start-Job -FilePath C:\Users\Guest\Desktop\Powershell_AutomatisierungZG\ResponseCheck.ps1
     $excl.Run("EverythingInOne")
 
     Start-Sleep -s 180
