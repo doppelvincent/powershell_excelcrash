@@ -19,7 +19,6 @@ Function OpenAndRunZG {
     Start-Sleep -s 60
     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
     Write-Output $worksheet.name
-    Start-Sleep -s 3
     $excl.Run("EverythingInOne")
 
     Add-Type -AssemblyName System.Windows.Forms
@@ -130,12 +129,14 @@ for(;;){
                 
             }
         Else {
+            
             $i = 1
             while ($true){
-                $proc = Get-Process -Name EXCEL -ErrorAction SilentlyContinue
+                $proc = Get-Process -Name EXCEL | Sort-Object -Property ProcessName -Unique -ErrorAction SilentlyContinue
                 if ($proc.Responding -eq $false){
+                    Write-Host "Excel is not responding $i"
                     $i += 1
-                    if ($i -eq 1200){
+                    if ($i -eq 180){
                         $proc.Kill()
                         break
                     }
