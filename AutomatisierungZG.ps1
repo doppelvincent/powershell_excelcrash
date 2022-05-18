@@ -136,7 +136,7 @@ for(;;){
                 if ($proc.Responding -eq $false){
                     Write-Host "Excel is not responding $i"
                     $i += 1
-                    if ($i -eq 180){
+                    if ($i -eq 1200){
                         $proc.Kill()
                         break
                     }
