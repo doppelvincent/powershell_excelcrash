@@ -6,6 +6,7 @@ while ($true){
       $i += 1
       if ($i -eq 1200){
           $proc.Kill()
+          New-Item -Path "C:\Users\Guest\Desktop\notrespondingfor20minutes.txt"
           break
       }
   }
