@@ -1,3 +1,4 @@
+$i = 0
 while ($true){
   $proc = Get-Process -Name EXCEL | Sort-Object -Property ProcessName -Unique -ErrorAction SilentlyContinue
   if ($proc.Responding -eq $false){
@@ -7,6 +8,9 @@ while ($true){
           $proc.Kill()
           break
       }
+  }
+  else {
+    $i = 0
   }
   Start-Sleep -s 1
 }
