@@ -1,6 +1,7 @@
 $folderPath = "C:\Users\Guest\Desktop\Powershell_AutomatisierungZG"    
 $fileName = Get-ChildItem -Path $folderPath -File -Filter *.xlsb -Recurse
 # Hello Vincent is here, not Alice
+# check24 motto: mind over body, age is just a number, justice may be blind
 $filePath = Join-Path -Path $folderPath -ChildPath $fileName
 
 Function OpenAndRunZG {
