@@ -31,11 +31,13 @@ Function OpenAndRunZG {
         }
     
     }
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(8, 2) = "No"
     Start-Sleep -s 3
     $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
     Start-Sleep -s 3
     $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
     Start-Sleep -s 3
+
 
     $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
@@ -81,6 +83,7 @@ Function OpenAndRunZG_WD{
         }
     
     }
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(8, 2) = "No"
     Start-Sleep -s 3
     $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
     Start-Sleep -s 3
