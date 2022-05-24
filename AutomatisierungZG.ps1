@@ -21,6 +21,25 @@ Function OpenAndRunZG {
     Start-Job -FilePath C:\Users\Guest\Desktop\Powershell_AutomatisierungZG\ResponseCheck.ps1
     $excl.Run("EverythingInOne")
 
+    $worksheet = $excl.Worksheets.item('WEBDRIVER RESULT')
+    For ($i = 7;;$i++){
+        $text = $worksheet.Cells(4,$i).Text
+        if ($text -eq ""){
+            $lastcolumn = $i - 1
+            break
+        }
+    
+    }
+    Start-Sleep -s 3
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
+    Start-Sleep -s 3
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
+    Start-Sleep -s 3
+    
+    $anzahl = $lastcolumn - 3
+    $worksheet.Cells.Item(2,2) = "4"
+    $worksheet.Cells.Item(3,2) = "$anzahl"
+
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
 
@@ -39,7 +58,7 @@ Function OpenAndRunZG_WD{
     $popup.SendKeys("{ESC}")
 
     Start-Sleep -s 60
-
+    
     $worksheet = $excl.Worksheets.item('Dashboard für ZG im CI').Activate()
     Write-Output $worksheet.name
 
@@ -59,6 +78,10 @@ Function OpenAndRunZG_WD{
         }
     
     }
+    Start-Sleep -s 3
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
+    Start-Sleep -s 3
+    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
     Start-Sleep -s 3
     $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
