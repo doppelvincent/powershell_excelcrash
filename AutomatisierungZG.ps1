@@ -21,6 +21,8 @@ Function OpenAndRunZG {
     Write-Output $worksheet.name
     Start-Job -FilePath C:\Users\Guest\Desktop\Powershell_AutomatisierungZG\ResponseCheck.ps1
     $excl.Run("EverythingInOne")
+    Start-Sleep -s 180
+    Write-Host ("DER ZG IST DURCHGELAUFEN")
 
     $worksheet = $excl.Worksheets.item('WEBDRIVER RESULT')
     For ($i = 7;;$i++){
@@ -31,18 +33,15 @@ Function OpenAndRunZG {
         }
     
     }
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(8, 2) = "No"
-    Start-Sleep -s 3
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
-    Start-Sleep -s 3
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
-    Start-Sleep -s 3
-
-
+    
+    
     $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
     $worksheet.Cells.Item(3,2) = "$anzahl"
     $worksheet.Cells.Item(6,2) = "Yes"
+    $worksheet.Cells.Item(8,2) = "No"
+    $worksheet.Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
+    $worksheet.Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
 
 
     Add-Type -AssemblyName System.Windows.Forms
@@ -83,16 +82,12 @@ Function OpenAndRunZG_WD{
         }
     
     }
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(8, 2) = "No"
-    Start-Sleep -s 3
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
-    Start-Sleep -s 3
-    $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
-    Start-Sleep -s 3
-    $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
     $worksheet.Cells.Item(3,2) = "$anzahl"
     $worksheet.Cells.Item(6,2) = "Yes"
+    $worksheet.Cells.Item(8,2) = "No"
+    $worksheet.Cells.Item(16, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(12, 11)
+    $worksheet.Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
 
     Write-Host ("DER WEBDRIVER WIRD IN 30 SEKUNDEN BEGINNEN")
     Start-Sleep -s 30
