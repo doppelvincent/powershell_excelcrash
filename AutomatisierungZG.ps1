@@ -36,10 +36,12 @@ Function OpenAndRunZG {
     Start-Sleep -s 3
     $excl.Worksheets.item('WEBDRIVER RESULT').Cells.Item(24, 2) = $excl.Worksheets.item('Dashboard für ZG im CI').Cells.Item(13, 11)
     Start-Sleep -s 3
-    
+
     $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
     $worksheet.Cells.Item(3,2) = "$anzahl"
+    $worksheet.Cells.Item(6,2) = "Yes"
+
 
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.MessageBox]::Show("ALLES IST FERTIG!! Das Excel ist $counter Mal abgestürzt!", "SteuerCHECK", 0, [System.Windows.Forms.MessageBoxIcon]::Information)
@@ -87,6 +89,8 @@ Function OpenAndRunZG_WD{
     $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
     $worksheet.Cells.Item(3,2) = "$anzahl"
+    $worksheet.Cells.Item(6,2) = "Yes"
+
     Write-Host ("DER WEBDRIVER WIRD IN 30 SEKUNDEN BEGINNEN")
     Start-Sleep -s 30
     $excl.Run("RunWebDriverCode")
