@@ -82,6 +82,7 @@ Function OpenAndRunZG_WD{
         }
     
     }
+    $anzahl = $lastcolumn - 3
     $worksheet.Cells.Item(2,2) = "4"
     $worksheet.Cells.Item(3,2) = "$anzahl"
     $worksheet.Cells.Item(6,2) = "Yes"
