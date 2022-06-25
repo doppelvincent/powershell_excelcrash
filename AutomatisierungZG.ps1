@@ -6,6 +6,7 @@ $filePath = Join-Path -Path $folderPath -ChildPath $fileName
 
 Function OpenAndRunZG {
     Param([string]$Path)
+    #Hallo
     $excl = New-Object -ComObject Excel.Application
     #$excl.Visible = $true
     #$excl.Workbooks.Open($Path)
